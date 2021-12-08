@@ -7,7 +7,9 @@ public class Tabla {
     private String maximo;
     private String porcentaje;
 
+    public Tabla(){
 
+    }
     public Tabla(String id, int minimo, int maximo, int porcentaje) {
         this.id = id;
         this.minimo = minimo+"";

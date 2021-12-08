@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.team.proyectosmarthf.modelo.ConnectionDB;
+import com.team.proyectosmarthf.modelo.Tabla;
 
 public class MainActivity extends AppCompatActivity {
     private TextView txtporcentaje;
@@ -28,11 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private int min;
     private int max;
 
-
     private FloatingActionButton btnActualizar;
     private BottomAppBar menu;
-
-
+    private ConnectionDB obj = new ConnectionDB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inicializarComponentes();
+        obj.iniciarConexion(MainActivity.this);
+
+
+
+
+
+
+
+
 
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtminimos.setText("minimo: "+progress);
                 min = progress;
+                progreso.setProgress(progress);
+                txtporcentaje.setText(progress+"%");
+
             }
 
             @Override
@@ -88,17 +100,14 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menuGuardar:
                         /*Guardar Cambios*/
-                        Toast.makeText(MainActivity.this,"minimo "+min+"\nmaximo "+max, Toast.LENGTH_SHORT).show();
-
-
+                        Tabla datos = new Tabla("arduino1",min,max,progreso.getProgress());
+                        obj.setValues(datos);
                         Toast.makeText(MainActivity.this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT).show();
                         break;
                     default:
-                    Toast.makeText(MainActivity.this, "Cambios No Aplicados correctamente",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Cambios No Aplicados",Toast.LENGTH_SHORT).show();
 
                 }
-
-
                 return true;
             }
         });
@@ -106,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void actualizar() {
         /*Actualizar porcentaje de la base de datos*/
-
+        Tabla d = obj.getValues("arduino1");
+        txtporcentaje.setText(d.getPorcentaje() + "%");
+        progreso.setProgress(Integer.parseInt(d.getPorcentaje()));
     }
 
     private void inicializarComponentes(){
