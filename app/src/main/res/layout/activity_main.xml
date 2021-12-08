@@ -9,29 +9,70 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         >
 
         <ProgressBar
+            android:id="@+id/barraProgreso"
             android:layout_width="400dp"
             android:layout_height="400dp"
+            android:layout_centerHorizontal="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle"
-            tools:progress="100"
             android:rotation="270"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            tools:progress="100" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="142dp"
+            android:layout_marginEnd="128dp"
+            android:text="90%"
+            android:textSize="80dp" />
+
+        <TextView
+            android:id="@+id/txtmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/barraProgreso"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:text="minimo"
+            android:textColor="@color/gray" />
+
+        <SeekBar
+            android:id="@+id/seekBarMinimo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/txtmin"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
             />
 
         <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="90%"
-                android:textSize="80dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
+            android:id="@+id/txtmax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="maximo"
+            android:textColor="@color/gray"
+            android:layout_below="@+id/seekBarMinimo"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             />
+
+        <SeekBar
+            android:id="@+id/seekBarMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/txtmax"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            />
+
 
     </RelativeLayout>
 
@@ -46,12 +87,14 @@
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_refresh"
         android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_refresh"
         app:layout_anchor="@id/Appmenu"
         app:maxImageSize="35dp"
-        app:tint="@color/white"/>
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
