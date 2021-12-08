@@ -2,6 +2,7 @@ package com.team.proyectosmarthf;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private FloatingActionButton btnActualizar;
-
+    private BottomAppBar menu;
 
 
 
@@ -47,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 actualizar();
             }
         });
-
-
-
-
-
         barraMaximos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -69,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
         barraMinimos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -88,32 +82,26 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        menu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menuGuardar:
+                        /*Guardar Cambios*/
+                        Toast.makeText(MainActivity.this,"minimo "+min+"\nmaximo "+max, Toast.LENGTH_SHORT).show();
 
 
+                        Toast.makeText(MainActivity.this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                    Toast.makeText(MainActivity.this, "Cambios No Aplicados correctamente",Toast.LENGTH_SHORT).show();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_app_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menuGuardar){
-            /*Guardar Cambios*/
-            Toast.makeText(MainActivity.this,"minimo "+min+"\nmaximo "+max, Toast.LENGTH_SHORT);
+                }
 
 
-            Toast.makeText(this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT);
-        }else{
-            Toast.makeText(this, "Cambios No Aplicados correctamente",Toast.LENGTH_SHORT);
-
-        }
-
-
-        return true;
+                return true;
+            }
+        });
     }
 
     private void actualizar() {
@@ -129,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         barraMinimos = (SeekBar) findViewById(R.id.seekBarMinimo);
         barraMaximos = (SeekBar) findViewById(R.id.seekBarMax);
         btnActualizar = (FloatingActionButton) findViewById(R.id.btnRefresh);
+        menu = (BottomAppBar) findViewById(R.id.Appmenu);
     }
 
 
