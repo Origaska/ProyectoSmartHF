@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     private SeekBar barraMinimos;
     private SeekBar barraMaximos;
+    private int min;
+    private int max;
+
 
     private FloatingActionButton btnActualizar;
 
@@ -39,20 +43,73 @@ public class MainActivity extends AppCompatActivity {
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 actualizar();
             }
         });
 
+
+
+
+
+        barraMaximos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtmaximos.setText("maximo: "+progress);
+                max = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+        barraMinimos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtminimos.setText("minimo: "+progress);
+                min = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_app_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menuGuardar){
             /*Guardar Cambios*/
-
+            Toast.makeText(MainActivity.this,"minimo "+min+"\nmaximo "+max, Toast.LENGTH_SHORT);
 
 
             Toast.makeText(this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT);
+        }else{
+            Toast.makeText(this, "Cambios No Aplicados correctamente",Toast.LENGTH_SHORT);
+
         }
 
 
