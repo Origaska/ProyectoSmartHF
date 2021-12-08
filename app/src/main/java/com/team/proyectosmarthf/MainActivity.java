@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtminimos.setText("minimo: "+progress);
                 min = progress;
-                progreso.setProgress(progress);
-                txtporcentaje.setText(progress+"%");
+//                progreso.setProgress(progress);
+//                txtporcentaje.setText(progress+"%");
 
             }
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menuGuardar:
                         /*Guardar Cambios*/
-                        Tabla datos = new Tabla("arduino1",min,max,progreso.getProgress());
+                        Tabla datos = new Tabla("arduino1",min,max,Integer.parseInt(obj.getValues().getPorcentaje()));
                         obj.setValues(datos);
                         Toast.makeText(MainActivity.this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT).show();
                         break;
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void actualizar() {
         /*Actualizar porcentaje de la base de datos*/
-        Tabla d = obj.getValues("arduino1");
+        Tabla d = obj.getValues();
         txtporcentaje.setText(d.getPorcentaje() + "%");
         progreso.setProgress(Integer.parseInt(d.getPorcentaje()));
     }

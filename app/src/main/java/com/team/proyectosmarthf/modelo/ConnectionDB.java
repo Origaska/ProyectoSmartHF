@@ -23,6 +23,9 @@ public class ConnectionDB {
     public void iniciarConexion (Context cntx){
         FirebaseApp.initializeApp(cntx);
         dbref = FirebaseDatabase.getInstance().getReference();
+        setElement();
+    }
+    private void setElement(){
         DatabaseReference ref = dbref.child("Usuario1");
         ref.child("arduino1").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -39,7 +42,8 @@ public class ConnectionDB {
         dbref.child("Usuario1").child(datos.getId()).setValue(datos);
     }
 
-    public Tabla getValues(String id){
+    public Tabla getValues(){
+        setElement();
         return valores;
     }
 
