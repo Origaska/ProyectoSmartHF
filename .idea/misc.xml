@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lucio/AndroidStudioProjects/ProyectoSmartHF/app/src/main/res/drawable/circle.xml" value="0.240625" />
+        <entry key="..\:/Users/lucio/AndroidStudioProjects/ProyectoSmartHF/app/src/main/res/drawable/ic_save.xml" value="0.240625" />
         <entry key="..\:/Users/lucio/AndroidStudioProjects/ProyectoSmartHF/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/lucio/AndroidStudioProjects/ProyectoSmartHF/app/src/main/res/menu/bottom_app_menu.xml" value="0.22447916666666667" />
       </map>
