@@ -44,7 +44,9 @@ public class ConnectionDB {
 
     public Tabla getValues(){
         setElement();
-        return valores;
+        Tabla a = valores;
+        valores = null;
+        return a;
     }
 
 

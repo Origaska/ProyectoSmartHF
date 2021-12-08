@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private int min;
     private int max;
 
+
     private FloatingActionButton btnActualizar;
     private BottomAppBar menu;
     private ConnectionDB obj = new ConnectionDB();
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         inicializarComponentes();
         obj.iniciarConexion(MainActivity.this);
+
 
 
 
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtmaximos.setText("maximo: "+progress);
                 max = progress;
+//                progreso.setProgress(progress);
+//                txtporcentaje.setText(progress+"%");
             }
 
             @Override
@@ -71,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
         barraMinimos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -91,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
         menu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -100,9 +102,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menuGuardar:
                         /*Guardar Cambios*/
-                        Tabla datos = new Tabla("arduino1",min,max,Integer.parseInt(obj.getValues().getPorcentaje()));
-                        obj.setValues(datos);
-                        Toast.makeText(MainActivity.this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT).show();
+                        if (min<max){
+                            Tabla datos = new Tabla("arduino1",min,max,Integer.parseInt(obj.getValues().getPorcentaje()));
+                            obj.setValues(datos);
+                            Toast.makeText(MainActivity.this, "Cambios Aplicados correctamente",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Minimos no puede ser mayor o igual que maximo",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default:
                     Toast.makeText(MainActivity.this, "Cambios No Aplicados",Toast.LENGTH_SHORT).show();
@@ -118,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
         Tabla d = obj.getValues();
         txtporcentaje.setText(d.getPorcentaje() + "%");
         progreso.setProgress(Integer.parseInt(d.getPorcentaje()));
+        barraMaximos.setProgress(Integer.parseInt(d.getMaximo()));
+        barraMinimos.setProgress(Integer.parseInt(d.getMinimo()));
     }
 
     private void inicializarComponentes(){
